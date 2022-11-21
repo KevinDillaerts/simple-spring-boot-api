@@ -19,7 +19,7 @@ The code below accepts the request, including the "patch" operations.
 See this link for more info on those: https://jsonpatch.com/
 
 ```java
-    @PatchMapping(path = "/{id}", consumes = "application/json-patch+json")
+@PatchMapping(path = "/{id}", consumes = "application/json-patch+json")
 @ResponseStatus(HttpStatus.OK)
 public ProfessorDTO patchProfessor(@PathVariable String id,@RequestBody JsonPatch patch)throws JsonPatchException,JsonProcessingException{
         return professorService.patchProfessor(id,patch);
@@ -58,15 +58,15 @@ In short, this is what it does:
 3. The following line does a few things:
     1. We convert the Professor to a JsonNode type (using the objectmapper)
     2. We then apply the patch operations to this JsonNode
-    3. Finally this returns a JsonNode object, that is patched with the new values
+    3. Finally, this returns a JsonNode object, that is patched with the new values
 4. Finally:
     1. We convert this JsonPatch object back to a class from our application (in this case the ProfessorDTO we need to
        update the Professor)
-        2. We call the updateProfessor method with this new DTO to actually update the values in our repository.  
-           (so far this was only patched in the JsonNode object, but not yet in the actual repo)
-        3. We finally convert the Professor that is returned from the update method back into a ProfessorDTO, as this is
-           what we'll pass back to the controller.  
-           (this step can be more efficient as we're now converting a lot :) )
+    2. We call the updateProfessor method with this new DTO to actually update the values in our repository.  
+       (so far this was only patched in the JsonNode object, but not yet in the actual repo)
+    3. We finally convert the Professor that is returned from the update method back into a ProfessorDTO, as this is
+          what we'll pass back to the controller.  
+          (this step can be more efficient as we're now converting a lot :) )
 
 ## Custom error page
 
